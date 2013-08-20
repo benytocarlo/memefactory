@@ -6,8 +6,6 @@
 <link href="css/style.css" />
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
 
-
-
 <style>
 .minibox {
 width: 50px;
@@ -65,7 +63,12 @@ p { margin:0px;}
         
         
         <div id="sandbox_box"></div>
-        <div id="sandbox_post"></div>
+        <div id="sandbox_post">
+          <?php
+            $divshoot = $_POST["html_shoot"];
+            echo $divshoot;
+          ?>
+        </div>
         
     </div>
 </body>
@@ -74,56 +77,4 @@ p { margin:0px;}
   <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.10.2/TweenMax.min.js"></script>
   <script src="js/jq_rotate_min.js"></script>
   <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-<script>
-
-
-  // Funcion de Añadir Imagen
-  $(function() {
-	$('#addbox').click(function(){
-		$('#sandbox_box').append( "<div class='minibox scale'><div class='form'></div></div>" );
-		$('.form').click(function(){$('.form').removeClass('rotate');$(this).parent('.minibox').removeClass('selected');$(this).addClass('rotate');$(this).parent('.minibox').addClass('selected');});
-    	$( ".minibox" ).draggable({ containment: "#sandbox_box", scroll: false });
-		$(".minibox").resizable({containment: "#sandbox_box"});
-	});
-
-
-  // Funcion de Añadir Texto	
-	$('#addtext').click(function(){
-		$('#sandbox_box').append( "<div class='minibox scale'><p class='texto'>" + $('#texto_input').val() + "</p></div>" );
-		$('.minibox').click(function(){$('.minibox').removeClass('selected');$(this).addClass('selected');});
-		$(".minibox" ).draggable({ containment: "#sandbox_box", scroll: false });
-		$(".minibox").resizable({containment: "#sandbox_box"});
-	});
-	
-	//Eliminar
-	
-	$('#erase_element').click(function(){$('.selected').remove();});
-
-	
-	// Slider JqueryUI
-    $( "#slider" ).slider({
-      range: "max",
-      min: 0,
-      max: 360,
-      slide: function( event, ui ) {		 
-		 var mov = ui.value; 
-		  
-        $( "#amount" ).val( ui.value );
-		$(".rotate").rotate({animateTo:mov})		
-      }
-    });
-	
-  });
-
-$('.ui-slider-handle');
-
-</script>
-<script>
-// Funcion de Añadir Texto	
-$('#print_html').click(function(){
-  var html = $("#sandbox_box").html();
-  $("#html_shoot").val(html);
-  $("#form").submit();
-});
-</script>
 </html>
