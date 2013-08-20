@@ -30,6 +30,8 @@ border:2px dotted #666;
 
 .rotate { background-color:green;}
 
+.edit_block { background-color:transparent; border:none;}
+
 p { margin:0px;}
 
 #slider {}
@@ -52,6 +54,9 @@ p { margin:0px;}
 			<div class="fila">
             	<label>Rotar Imagen</label>
 		        <div id="slider"></div>
+            </div>
+            <div class="fila text_buttons">
+            	<button id="editar_texto">Editar Texto Seleccionado</button>
             </div>
             <div class="fila">
             	<button id="erase_element">Eleminar Elemento Seleccionado</button>
@@ -92,6 +97,28 @@ p { margin:0px;}
 	$('#addtext').click(function(){
 		$('#sandbox_box').append( "<div class='minibox scale'><p class='texto'>" + $('#texto_input').val() + "</p></div>" );
 		$('.minibox').click(function(){$('.minibox').removeClass('selected');$(this).addClass('selected');});
+		$('#editar_texto').click(function(){
+				var text_edit = $('.selected').children('.texto').text();
+
+				if ( $(".texto").parent().hasClass("selected") )
+				  {
+					$('.selected').children('.texto').hide();
+					$('.selected').append("<input class='edit_block' value='" + text_edit + "'>")
+					$('.text_buttons').hide('#editar_texto');
+					$('.selected').keyup(function(e){
+						if (e.keyCode == 13) { 
+							var text_final = $('.edit_block').val()
+							
+							$(this).children('.texto').remove();							
+							$(this).children('.edit_block').remove()
+							$(this).append("<p class='texto'>" + text_final + "</p>");
+							$('.text_buttons').show('#editar_texto');
+						   return false;
+						}
+					});
+				  }
+
+		});
 		$(".minibox" ).draggable({ containment: "#sandbox_box", scroll: false });
 		$(".minibox").resizable({containment: "#sandbox_box"});
 	});
