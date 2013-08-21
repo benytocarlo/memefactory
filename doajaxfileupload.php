@@ -19,7 +19,6 @@
 			case '4':
 				$error = 'No file was uploaded.';
 				break;
-
 			case '6':
 				$error = 'Missing a temporary folder';
 				break;
@@ -50,10 +49,10 @@
 			$ext = explode(".", $archivo["name"]);
 		    $nuevoarchivo = md5(time()) . "." . $ext[count($ext) - 1];
 		    move_uploaded_file($archivo["tmp_name"], "uploads/$nuevoarchivo");
-			$image = new SimpleImage();
+			  $image = new SimpleImage();
 		    $image -> load("uploads/$nuevoarchivo");
-		    $image -> resizeToWidth(300);
-		    $image -> resizeToHeight(300);
+        $ancho = $image -> getWidth();
+        $alto = $image -> getHeight();
 		    $image -> save("uploads/$nuevoarchivo");
 		    $nuevoarchivo_array = explode(".", $nuevoarchivo);
 		    $nuevoarchivo_ext = $nuevoarchivo_array[count($nuevoarchivo_array) - 1];
@@ -62,6 +61,8 @@
 	}		
 	echo "{";
 	echo				"error: '" . $error . "',\n";
+  echo				"alto: '" . $alto . "',\n";
+  echo				"ancho: '" . $ancho . "',\n";
 	echo				"msg: '" . $nuevoarchivo . "'\n";
 	echo "}";
 ?>

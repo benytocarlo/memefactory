@@ -349,16 +349,20 @@ $('#print_html').click(function(){
               {
                 var d = new Date();
                 var archivo = data.msg;
+                var alto = data.alto;
+                var ancho = data.ancho;
                 var id = "subido-" + data.nombre + "-" + d.getTime();
-				$("div").removeClass("new_img");
-                $("#sandbox_box").append("<div class='minibox new_img'><div class='form'><img src='uploads/" + archivo + "'></div></div></div>");
+			          $("div").removeClass("new_img");
+                if(alto>300){ alto=300; }
+                if(ancho>400){ ancho=400; }
+                $("#sandbox_box").append("<div class='minibox new_img' style='width:"+alto+"px;height:"+ancho+"px'><div class='form'><img src='uploads/" + archivo + "'></div></div></div>");
 
 				// Tamaño Default de la imagen
-				var img_width = $(".new_img img").width();
+				/*var img_width = $(".new_img img").width();
 				var img_height = $(".new_img img").height();
 				
 				$('.new_img').css("width", "200px")
-				$('.new_img').css("height", "auto")
+				$('.new_img').css("height", "auto")*/
 				
 				$('.new_img img').css({"width":"100%","height":"100%"});
 				$('.form').click(function(){$('.form').removeClass('rotate');$('.minibox').removeClass('selected');$(this).addClass('rotate');$(this).parent('.minibox').addClass('selected');});
