@@ -7,10 +7,6 @@
 
 	border: 1px solid #666;
 
-	-moz-border-radius: 10px;
-	-webkit-border-radius: 10px;
-	border-radius: 10px;
-
 	-moz-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
 	-webkit-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
 	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
@@ -60,3 +56,5 @@
 			#jquery-colour-picker ul li a:hover {
 				border-color: #000;
 			}
+			
+#color_code { text-indent:-9999px; border:0px;}

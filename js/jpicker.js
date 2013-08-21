@@ -135,7 +135,7 @@ jQuery.fn.colourPicker = function (conf) {
 		ico:		'ico.gif',				// SRC to colour-picker icon
 		title:		'Pick a colour',		// Default dialogue title
 		inputBG:	true,					// Whether to change the input's background to the selected colour's
-		speed:		500,					// Speed of dialogue-animation
+		speed:		200,					// Speed of dialogue-animation
 		openTxt:	'Open colour picker'
 	}, conf);
 
@@ -157,7 +157,7 @@ jQuery.fn.colourPicker = function (conf) {
 		// Remove the colour-picker if you click outside it (on body)
 		jQuery(document.body).click(function(event) {
 			if (!(jQuery(event.target).is('#' + config.id) || jQuery(event.target).parents('#' + config.id).length)) {
-				colourPicker.hide(config.speed);
+				colourPicker.fadeOut(config.speed);
 			}
 		});
 	}
@@ -167,7 +167,7 @@ jQuery.fn.colourPicker = function (conf) {
 		// Insert icon and input
 		var select	= jQuery(this);
 		var icon	= jQuery('<a href="#"><img src="' + config.ico + '" alt="' + config.openTxt + '" /></a>').insertAfter(select);
-		var input	= jQuery('<input type="text" name="' + select.attr('name') + '" value="' + select.val() + '" size="6" />').insertAfter(select);
+		var input	= jQuery('<input id="color_code" type="text" name="' + select.attr('name') + '" value="' + select.val() + '" size="6" />').insertAfter(select);
 		var loc		= '';
 
 		// Build a list of colours based on the colours in the select
@@ -196,6 +196,7 @@ jQuery.fn.colourPicker = function (conf) {
 		if (config.inputBG) {
 			input.change(function () {
 				input.css({background: '#' + input.val(), color: '#' + hexInvert(input.val())});
+				$('.selected').children('.edit_block').css("color", '#' + input.val());
 			});
 
 			input.change();
@@ -211,7 +212,7 @@ jQuery.fn.colourPicker = function (conf) {
 				position: 'absolute', 
 				left: iconPos.left + 'px', 
 				top: iconPos.top + 'px'
-			}).show(config.speed);
+			}).fadeIn(config.speed);
 
 			// When you click a colour in the colour-picker
 			jQuery('a', colourPicker).click(function () {
@@ -229,7 +230,7 @@ jQuery.fn.colourPicker = function (conf) {
 				input.change();
 
 				// Hide the colour-picker and return false
-				colourPicker.hide(config.speed);
+				colourPicker.fadeOut(config.speed);
 
 				return false;
 			});
