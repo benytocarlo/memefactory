@@ -66,9 +66,21 @@ p { margin:0px;}
 
 <body>
     <div>
-    	<div class="fila" id="uploadimage">
+    	<div class="fila uploadimage">
     		<label>Añadir Imagen</label>
-        <input type="file" name="fileToUpload" id="fileToUpload" />
+        <input type="file" name="fileToUpload" id="upload1" />
+    	</div>
+    	<div class="fila uploadimage">
+    		<label>Añadir Imagen</label>
+        <input type="file" name="fileToUpload" id="upload2" />
+    	</div>
+    	<div class="fila uploadimage">
+    		<label>Añadir Imagen</label>
+        <input type="file" name="fileToUpload" id="upload3" />
+    	</div>
+    	<div class="fila uploadimage">
+    		<label>Añadir Imagen</label>
+        <input type="file" name="fileToUpload" id="upload4" />
     	</div>
         <div id="sandbox_tools">
         	<div class="fila">
@@ -292,7 +304,7 @@ $('#colourpicker').colourPicker({
       range: "max",
       min: 0,
       max: 360,
-      slide: function( event, ui ) {		 
+      slide: function( event, ui ) {
 		 var mov = ui.value; 
 		  
         $( "#amount" ).val( ui.value );
@@ -301,9 +313,6 @@ $('#colourpicker').colourPicker({
     });
 	
   });
-
-
-
 </script>
 <script>
 // Funcion PRINT
@@ -316,12 +325,14 @@ $('#print_html').click(function(){
 <script type="text/javascript" src="js/ajaxfileupload.js"></script>
 <script>
     // Funcion para agregar imagenes al Meme
-    $('#uploadimage input[type=file]').bind('change', function() {
-  		ajaxFileUpload();
+    $('.uploadimage input[type=file]').bind('change', function() {
+      var id_input = $(this).attr("id");
+  		ajaxFileUpload(id_input);
   	});
 
-    function ajaxFileUpload()
+    function ajaxFileUpload(id_input)
     {
+      var idinput = id_input;
       $("#loading")
       .ajaxStart(function(){
         $(this).show();
@@ -335,7 +346,7 @@ $('#print_html').click(function(){
         {
           url:'doajaxfileupload.php',
           secureuri:false,
-          fileElementId:'fileToUpload',
+          fileElementId:idinput,
           dataType: 'json',
           data:{name:'logan', id:'id'},
           success: function (data, status)
