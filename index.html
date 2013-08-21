@@ -64,7 +64,10 @@ p { margin:0px;}
 
 <body>
     <div>
-        
+    	<div class="fila">
+    		<label>Añadir Imagen</label>
+        <input type="file" name="fileToUpload" id="fileToUpload" />
+    	</div>
         <div id="sandbox_tools">
         	<div class="fila">
         		<button id="addbox">Añadir Caja</button>
@@ -226,5 +229,57 @@ $('#print_html').click(function(){
   $("#html_shoot").val(html);
   $("#form").submit();
 });
+</script>
+<script type="text/javascript" src="js/ajaxfileupload.js"></script>
+<script>
+    // Funcion para agregar imagenes al Meme
+    $('#uploadimage input[type=file]').bind('change', function() {
+  		ajaxFileUpload();
+  	});
+
+    function ajaxFileUpload()
+    {
+      $("#loading")
+      .ajaxStart(function(){
+        $(this).show();
+      })
+      .ajaxComplete(function(){
+        $(this).hide();
+      });
+
+      $.ajaxFileUpload
+      (
+        {
+          url:'doajaxfileupload.php',
+          secureuri:false,
+          fileElementId:'fileToUpload',
+          dataType: 'json',
+          data:{name:'logan', id:'id'},
+          success: function (data, status)
+          {
+            if(typeof(data.error) != 'undefined')
+            {
+              if(data.error != '')
+              {
+                alert(data.error);
+              }else
+              {
+                var d = new Date();
+                var archivo = data.msg;
+                var id = "subido-" + data.nombre + "-" + d.getTime();
+                $("#sandbox_box").append("<div class='minibox scale'><div class='form'><img src='uploads/" + archivo + "'></div></div></div>");
+              }
+            }
+          },
+          error: function (data, status, e)
+          {
+            alert(e);
+          }
+        }
+      )
+    
+      return false;
+
+    }
 </script>
 </html>
