@@ -26,10 +26,11 @@ font-family: 'Titan One', cursive;
 .minibox {
 width:auto;
 height:auto;
-padding:8px;
+padding:4px;
+padding-bottom:8px;
 margin-left:4px;
 margin-bottom:4px;
-border:2px dotted #666;
+cursor:pointer;
 }
 
 .minibox .form img { width:100%; height:100%;}
@@ -237,11 +238,9 @@ $('#colourpicker').colourPicker({
   
 	  $("#arriba").click(function(){
 	  
-	  if($(".selected").css("z-index") != "")
-	  { $(".selected").css("z-index","1") };
-	  
 	  var z_position = $('.selected').css("z-index"); 
-		  $(".selected").css("z-index", z_position + 1);
+		  
+		  $(".selected").css("z-index", z_position + 1 - 9);
 	  });
 	  
 	  $("#abajo").click(function(){
@@ -254,7 +253,7 @@ $('#colourpicker').colourPicker({
 
   // Funcion de Añadir Texto	
 	$('#addtext').click(function(){
-		$('#sandbox_box').append( "<div class='minibox scale'><p class='texto'>" + $('#texto_input').val() + "</p></div>" );
+		$('#sandbox_box').append( "<div class='minibox scale' style='z-index:1;'><p class='texto'>" + $('#texto_input').val() + "</p></div>" );
 		$('.minibox').click(function(){$('.minibox').removeClass('selected');$(this).addClass('selected');});
 		
 		//Editar Texto
@@ -268,7 +267,7 @@ $('#colourpicker').colourPicker({
 					var elSize = $('.selected').children('.texto').css("font-size");
 
 					$('.selected').children('.texto').remove();
-					$('.selected').append("<textarea class='edit_block' >" + text_edit + "</textarea>");
+					$('.selected').append("<textarea class='edit_block' >"+ text_edit +"</textarea>");
 					$('#editar_texto').hide();
 					$('#tipos').show();
 					$('#cerrar_texto, #tipo_size, #font-colour-box').show();
@@ -285,10 +284,6 @@ $('#colourpicker').colourPicker({
 						$('.selected').children('.edit_block').css("font-size", $(this).val() + "px");
 					
 					});
-					$("#jquery-colour-picker ul li a").click(function(){
-						alert("ZUP");
-					});
-
 				  }
 		});
 		
