@@ -319,7 +319,15 @@ $('#colourpicker').colourPicker({
 $('#print_html').click(function(){
   var html = $("#sandbox_box").html();
   $("#html_shoot").val(html);
-  $("#form").submit();
+  var data = {
+    img_div: $("#html_shoot").val()
+  };
+  var ajaxurl = "consultas_sql.php";
+  $.post(ajaxurl, data, function(e) {
+    var id_insert=e;
+    location.href = "screenshot2.php?id_insert="+id_insert;
+  });
+  //$("#form").submit();
 });
 </script>
 <script type="text/javascript" src="js/ajaxfileupload.js"></script>
@@ -365,8 +373,8 @@ $('#print_html').click(function(){
                 var id = "subido-" + data.nombre + "-" + d.getTime();
 			          $("div").removeClass("new_img");
                 if(alto>300){ alto=300; }
-                if(ancho>400){ ancho=400; }
-                $("#sandbox_box").append("<div class='minibox new_img' style='width:"+alto+"px;height:"+ancho+"px'><div class='form'><img src='uploads/" + archivo + "'></div></div></div>");
+                if(ancho>400){ ancho=300; }
+                $("#sandbox_box").append("<div class='minibox new_img' style='width:"+alto+"px;height:"+ancho+"px;'><div class='form'><img src='uploads/" + archivo + "'></div></div></div>");
 
 				// Tamaño Default de la imagen
 				/*var img_width = $(".new_img img").width();
