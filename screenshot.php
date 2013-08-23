@@ -1,3 +1,6 @@
+<?php
+  require("connection.php");
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -38,20 +41,20 @@ p { margin:0px;}
     <div>
         
         <div id="sandbox_tools">
-        	<div class="fila">
-        		<button id="addbox">Añadir Caja</button>
-        	</div>
+          <div class="fila">
+            <button id="addbox">Añadir Caja</button>
+          </div>
             <div class="fila">
-            	<label>Añadir Tipo</label>
-		        <input type="text" id="texto_input" />
+              <label>Añadir Tipo</label>
+            <input type="text" id="texto_input" />
                 <button id="addtext">Añadir Texto</button>
             </div>
-			<div class="fila">
-            	<label>Rotar Imagen</label>
-		        <div id="slider"></div>
+      <div class="fila">
+              <label>Rotar Imagen</label>
+            <div id="slider"></div>
             </div>
             <div class="fila">
-            	<button id="erase_element">Eleminar Elemento Seleccionado</button>
+              <button id="erase_element">Eleminar Elemento Seleccionado</button>
             </div>
             <div class="fila">
               <button id="print_html">Imprimir HTML</button>
@@ -60,16 +63,19 @@ p { margin:0px;}
               </form>
             </div>
         </div>
-        
-        
-        <div id="sandbox_box"></div>
-        <div id="sandbox_post">
+        <div id="sandbox_box">
           <?php
-            $divshoot = $_POST["html_shoot"];
-            echo $divshoot;
+            //$divshoot = $_POST["html_shoot"];
+            //echo $divshoot;
+            $tabla= "img_creada";
+            $donde = "id=12123123";
+            $sql=mysql_query("SELECT * FROM ".$tabla." WHERE ".$donde);
+            $row=mysql_fetch_array($sql);
+            //echo $row["img_div"];
+            echo $row["img_div"];
           ?>
         </div>
-        
+        <div id="sandbox_post"></div>
     </div>
 </body>
 
