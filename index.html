@@ -398,8 +398,8 @@ $('#print_html').click(function(){
                 var ancho = data.ancho;
                 var id = "subido-" + data.nombre + "-" + d.getTime();
 			          $("div").removeClass("new_img");
-                if (alto>ancho) {
-                  if(alto>300){
+                if (alto >= ancho) {
+                  if(alto >300){
                     ancho=(300*data.ancho)/data.alto;
                     alto = 300;
                   }
