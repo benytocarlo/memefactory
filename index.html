@@ -372,9 +372,19 @@ $('#print_html').click(function(){
                 var ancho = data.ancho;
                 var id = "subido-" + data.nombre + "-" + d.getTime();
 			          $("div").removeClass("new_img");
-                if(alto>300){ alto=300; }
-                if(ancho>400){ ancho=300; }
-                $("#sandbox_box").append("<div class='minibox new_img' style='width:"+alto+"px;height:"+ancho+"px;'><div class='form'><img src='uploads/" + archivo + "'></div></div></div>");
+                if (alto>ancho) {
+                  if(alto>300){
+                    ancho=(300*data.ancho)/data.alto;
+                    alto = 300;
+                  }
+                }else{
+                  if(ancho>400){
+                    alto=(400*data.alto)/data.ancho;
+                    ancho = 400;
+                  }
+                }
+
+                $("#sandbox_box").append("<div class='minibox new_img' style='width:"+ancho+"px;height:"+alto+"px;'><div class='form'><img src='uploads/" + archivo + "'></div></div></div>");
 
 				// Tamaño Default de la imagen
 				/*var img_width = $(".new_img img").width();
