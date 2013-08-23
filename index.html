@@ -66,23 +66,22 @@ p { margin:0px;}
 </style>
 
 </head>
-
 <body>
     <div>
-    	<div class="fila uploadimage">
-    		<label>Añadir Imagen</label>
+    	<div class="fila uploadimage" id="upload_1" rel="1">
+    		<label>Añadir Imagen 1</label>
         <input type="file" name="fileToUpload" id="upload1" />
     	</div>
-    	<div class="fila uploadimage">
-    		<label>Añadir Imagen</label>
+    	<div class="fila uploadimage" id="upload_2" rel="2" style="display:none;">
+    		<label>Añadir Imagen 2</label>
         <input type="file" name="fileToUpload" id="upload2" />
     	</div>
-    	<div class="fila uploadimage">
-    		<label>Añadir Imagen</label>
+    	<div class="fila uploadimage" id="upload_3" rel="3" style="display:none;">
+    		<label>Añadir Imagen 3</label>
         <input type="file" name="fileToUpload" id="upload3" />
     	</div>
-    	<div class="fila uploadimage">
-    		<label>Añadir Imagen</label>
+    	<div class="fila uploadimage" id="upload_4" rel="4" style="display:none;"> 
+    		<label>Añadir Imagen 4</label>
         <input type="file" name="fileToUpload" id="upload4" />
     	</div>
         <div id="sandbox_tools">
@@ -407,6 +406,14 @@ $('#print_html').click(function(){
 
                 $("#sandbox_box").append("<div class='minibox new_img' style='width:"+ancho+"px;height:"+alto+"px;'><div class='form'><img src='uploads/" + archivo + "'></div></div></div>");
 
+                $("#"+idinput).hide();
+                var id_superior = $("#"+idinput).parent().attr('id');
+                $("#"+id_superior).hide();
+                var sgt_id = $("#"+id_superior).attr("rel");
+                if (sgt_id < 4){
+                  sgt_id= parseInt(sgt_id)+1;
+                  $("#upload_"+sgt_id).fadeIn();
+                }
 				// Tamaño Default de la imagen
 				/*var img_width = $(".new_img img").width();
 				var img_height = $(".new_img img").height();
