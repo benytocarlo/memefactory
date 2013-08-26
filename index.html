@@ -26,34 +26,34 @@ font-family: 'Titan One', cursive;
 .minibox {
 width:auto;
 height:auto;
-padding:8px;
+padding:4px;
+padding-bottom:8px;
 margin-left:4px;
 margin-bottom:4px;
-border:2px dotted #666;
+cursor:move;
 }
 
 .minibox .form img { width:100%; height:100%;}
 
 
 .texto { padding:2px;}
-.selected {border:2px dotted red !important}
+.selected {border:2px dotted red !important; margin:0px !important}
 
 .fila { float:left; width:100%; margin-bottom:10px;}
 
-.minibox { position:absolute; top:25px; left:25px;}
+.minibox { position:absolute; top:25px; left:25px; margin:2px}
 .minibox .form {width:100%; height:100%; }
-.minibox .form img { width:auto; height:auto}
 
 #sandbox_tools { width:500px; margin:25px;}
 
-#sandbox_box { position:relative; float:left;width:810px; height:600px; top:25%; left:15px; background-color:#CFF; clear:left;}
+#sandbox_box { position:relative; float:left;width:810px; height:600px; top:25%; left:15px; background-color:#CFF; clear:left; overflow:hidden}
 #sandbox_post { width:250px; float:left;}
 
 .rotate { background-color:green;}
 
-.edit_block { background-color:transparent; border:none; width:99%; height:99%;}
 
-p { margin:0px;}
+
+p { margin:0px; float:left}
 
 /* Display None */
 
@@ -73,8 +73,8 @@ p { margin:0px;}
     	</div>
         <div id="sandbox_tools">
         	<div class="fila">
-        		<button id="addbox">Añadir Caja</button>
-        	</div>
+            	<button id="add_img">Añadir Imagen</button>
+            </div>
             <div class="fila">
             	<label>Añadir Tipo</label>
 		        <input type="text" id="texto_input" />
@@ -224,10 +224,8 @@ $('#colourpicker').colourPicker({
   
 	  $("#arriba").click(function(){
 	  
-	  if($(".selected").css("z-index") != "")
-	  { $(".selected").css("z-index","1") };
-	  
-	  var z_position = $('.selected').css("z-index"); 
+	  var z_position = parseInt($('.selected').css("z-index")); 
+		  
 		  $(".selected").css("z-index", z_position + 1);
 	  });
 	  
@@ -241,7 +239,7 @@ $('#colourpicker').colourPicker({
 
   // Funcion de Añadir Texto	
 	$('#addtext').click(function(){
-		$('#sandbox_box').append( "<div class='minibox scale'><p class='texto'>" + $('#texto_input').val() + "</p></div>" );
+		$('#sandbox_box').append( "<div class='minibox scale' style='z-index:1;'><p class='texto'>" + $('#texto_input').val() + "</p></div>" );
 		$('.minibox').click(function(){$('.minibox').removeClass('selected');$(this).addClass('selected');});
 		
 		//Editar Texto
@@ -255,7 +253,7 @@ $('#colourpicker').colourPicker({
 					var elSize = $('.selected').children('.texto').css("font-size");
 
 					$('.selected').children('.texto').remove();
-					$('.selected').append("<textarea class='edit_block' >" + text_edit + "</textarea>");
+					$('.selected').append("<textarea class='edit_block' >"+ text_edit +"</textarea>");
 					$('#editar_texto').hide();
 					$('#tipos').show();
 					$('#cerrar_texto, #tipo_size, #font-colour-box').show();
@@ -272,10 +270,6 @@ $('#colourpicker').colourPicker({
 						$('.selected').children('.edit_block').css("font-size", $(this).val() + "px");
 					
 					});
-					$("#jquery-colour-picker ul li a").click(function(){
-						alert("ZUP");
-					});
-
 				  }
 		});
 		
@@ -315,8 +309,9 @@ $('#colourpicker').colourPicker({
 	// Slider JqueryUI
     $( "#slider" ).slider({
       range: "max",
-      min: 0,
-      max: 360,
+      min: -180,
+      max: 180,
+	  value: 0,
       slide: function( event, ui ) {
 		 var mov = ui.value; 
 		  
@@ -345,6 +340,9 @@ $('#print_html').click(function(){
 </script>
 <script type="text/javascript" src="js/ajaxfileupload.js"></script>
 <script>
+	// Funcion boton añadir imagen 
+	
+	
     // Funcion para agregar imagenes al Meme
 
     $('.uploadimage input[type=file]').on('change', function() {
@@ -398,7 +396,7 @@ $('#print_html').click(function(){
                   }
                 }
 
-                $("#sandbox_box").append("<div class='minibox new_img' style='width:"+ancho+"px;height:"+alto+"px;'><div class='form'><img src='uploads/" + archivo + "'></div></div></div>");
+                $("#sandbox_box").append("<div class='minibox new_img' style='width:"+ancho+"px;height:"+alto+"px; z-index:1'><div class='form'><img src='uploads/" + archivo + "'></div></div></div>");
 
                 var sgte_id = parseInt( $("#"+id_input).attr("rel") ) + 1;
                 $("#upload"+$("#"+id_input).attr("rel")).remove();
@@ -425,6 +423,7 @@ $('#print_html').click(function(){
 				
 				$('.new_img').css("width", "200px")
 				$('.new_img').css("height", "auto")*/
+
 				
 				$('.new_img img').css({"width":"100%","height":"100%"});
 				$('.form').click(function(){$('.form').removeClass('rotate');$('.minibox').removeClass('selected');$(this).addClass('rotate');$(this).parent('.minibox').addClass('selected');});
