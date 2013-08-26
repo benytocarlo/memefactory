@@ -1,10 +1,4 @@
-// Img editor bro
-
-//Color Picker
-$('#colourpicker').colourPicker({
- 	ico:    'img/color_picker.png', 
-    title:    false
-});
+// Img editor by CHACKNORRIS
 
 // Z-Position
 $(function (){
@@ -14,8 +8,14 @@ $(function (){
 	  $(".selected").css("z-index", z_position + 1);
   });
 	  $("#abajo").click(function(){
-  var z_position = $('.selected').css("z-index"); 
+  	  var z_position = $('.selected').css("z-index");
+	  
+	  if (z_position > 0)
+	  {
 	  $(".selected").css("z-index", z_position - 1);
+		  }
+	   
+
   });
 });
 
@@ -37,6 +37,7 @@ $('#addtext').click(function(){
 				var elColor = $('.selected').children('.texto').css("color");
 				var elFamily = $('.selected').children('.texto').css("font-family");
 				var elSize = $('.selected').children('.texto').css("font-size");
+				var elZindex = $('.selected').children('.texto').css("z-index");
 
 				$('.selected').children('.texto').remove();
 				$('.selected').append("<textarea class='edit_block' >"+ text_edit +"</textarea>");
@@ -45,6 +46,7 @@ $('#addtext').click(function(){
 				$('.selected').children('.edit_block').css("font-family", elFamily)
 				$('.selected').children('.edit_block').css("font-size", elSize)
 				$('.selected').children('.edit_block').css("color", elColor)
+				$('.selected').children('.edit_block').css("color", elZindex)
 				$("#tipos").change(function() {
 					//alert($(this).val());
 					$('.selected').children('.edit_block').css("font-family", $(this).val());
@@ -64,6 +66,7 @@ $('#addtext').click(function(){
 			var font_family = $('.edit_block').css("font-family");
 			var font_size = $('.edit_block').css("font-size");
 			var font_color = $('.edit_block').css("color");
+			var font_zindex = $('.edit_block').css("z-index");
 
 			if ( $(".edit_block").parent().hasClass("selected") )
 			  {
@@ -72,6 +75,7 @@ $('#addtext').click(function(){
 				$('.selected').children('.texto').css("font-family", font_family);
 				$('.selected').children('.texto').css("font-size", font_size);
 				$('.selected').children('.texto').css("color", font_color);
+				$('.selected').children('.texto').css("z-index", font_zindex);
 				$('.main_toolbox').show();
 				$('#tipos option:eq(0)').prop('selected', true);
 				$('#tipo_size option:eq(0)').prop('selected', true);
@@ -84,11 +88,18 @@ $('#addtext').click(function(){
 	$(".minibox").resizable({containment: "#sandbox_box"});
 });
 
+//Color Picker
+$('#colourpicker').colourPicker({
+ 	ico:    'img/color_picker.png', 
+    title:    false
+});
+
+
 // Rotate slider
 $( "#slider" ).slider({
   range: "max",
-  min: -180,
-  max: 180,
+  min: 0,
+  max: 360,
   value: 0,
   slide: function( event, ui ) {
 	 var mov = ui.value; 
@@ -99,9 +110,9 @@ $( "#slider" ).slider({
 });
 
 // Funcion para agregar imagenes al Meme
-$('.uploadimage input[type=file]').bind('change', function() {
+$('.uploadimage input[type=file]').on('change', function() {
   var id_input = $(this).attr("id");
-	ajaxFileUpload(id_input);
+  ajaxFileUpload(id_input);
 });
 
 function ajaxFileUpload(id_input)
@@ -152,14 +163,25 @@ function ajaxFileUpload(id_input)
 
 			$("#sandbox_box").append("<div class='minibox new_img' style='width:"+ancho+"px;height:"+alto+"px; z-index:1'><div class='form'><img src='uploads/" + archivo + "'></div></div></div>");
 
-			$("#"+idinput).hide();
+			var sgte_id = parseInt( $("#"+id_input).attr("rel") ) + 1;
+			$("#upload"+$("#"+id_input).attr("rel")).remove();
+			$("#upload").append('<input type="file" name="fileToUpload" id="upload'+sgte_id+'" rel="'+sgte_id+'" />');
+
+			$('.uploadimage input[type=file]').on('change', function() {
+			  var id_input = $(this).attr("id");
+			  ajaxFileUpload(id_input);
+			});
+
+			//$(".uploadimage").append('<label>Añadir Imagen '+sgte_id+'</label><input type="file" name="fileToUpload" id="upload'+sgte_id+'" rel="'+sgte_id+'" />');
+
+			/*$("#"+idinput).hide();
 			var id_superior = $("#"+idinput).parent().attr('id');
 			$("#"+id_superior).hide();
 			var sgt_id = $("#"+id_superior).attr("rel");
 			if (sgt_id < 4){
 			  sgt_id= parseInt(sgt_id)+1;
 			  $("#upload_"+sgt_id).fadeIn();
-			}
+			}*/
 			// Tamaño Default de la imagen
 			/*var img_width = $(".new_img img").width();
 			var img_height = $(".new_img img").height();
@@ -185,19 +207,3 @@ function ajaxFileUpload(id_input)
   return false;
 
 }
-
-
-// Funcion PRINT
-$('#print_html').click(function(){
-  var html = $("#sandbox_box").html();
-  $("#html_shoot").val(html);
-  var data = {
-    img_div: $("#html_shoot").val()
-  };
-  var ajaxurl = "consultas_sql.php";
-  $.post(ajaxurl, data, function(e) {
-    var id_insert=e;
-    location.href = "screenshot2.php?id_insert="+id_insert;
-  });
-  //$("#form").submit();
-});
