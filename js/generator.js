@@ -18,6 +18,24 @@ $(function (){
   });
 });
 
+// Funcion PRINT
+$('#print_html').click(function(){
+  var html = $("#sandbox_box").html();
+  if (html != "") {
+	$("#html_shoot").val(html);
+	var data = {
+	 img_div: $("#html_shoot").val()
+	};
+	var ajaxurl = "consultas_sql.php";
+	$.post(ajaxurl, data, function(e) {
+	  var id_insert=e;
+	  location.href = "screenshot2.php?id_insert="+id_insert;
+	});
+  }else{alert("vacio");}
+  //$("#form").submit();
+});
+
+
 // List of Fondos y Memes ---------------------------------------------------------------------
 
 $(".fondo_meme").click(function(){
