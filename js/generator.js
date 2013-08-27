@@ -1,6 +1,6 @@
 // Img editor by CHACKNORRIS
 
-// Z-Position
+// Z-Position -------------------------------------------------------------------------------
 $(function (){
   $("#arriba").click(function(){  
   var z_position = parseInt($('.selected').css("z-index")); 
@@ -10,23 +10,91 @@ $(function (){
 	  $("#abajo").click(function(){
   	  var z_position = $('.selected').css("z-index");
 	  
-	  if (z_position > 0)
+	  if (z_position > 1)
 	  {
 	  $(".selected").css("z-index", z_position - 1);
 		  }
-	   
 
   });
 });
 
+// List of Fondos y Memes ---------------------------------------------------------------------
 
-//Eliminar
+$(".fondo_meme").click(function(){
+	$(".memes_bigbox").fadeOut("fast");
+	$(".background_bigbox").fadeToggle("fast");
+	$(".minibox").click(function(){
+		$('.memes_bigbox').fadeOut();$('.background_bigbox').fadeOut();
+	});
+});
+
+$(".personajes_meme").click(function(){
+	$(".background_bigbox").fadeOut("fast");
+	$(".memes_bigbox").fadeToggle("fast");
+	$(".minibox").click(function(){
+		$('.memes_bigbox').fadeOut();$('.background_bigbox').fadeOut();
+	});
+});
+
+$("button.cerrar").click(function(){
+	$(this).parent("div").fadeOut("fast");
+});
+
+$(".background_bigbox img").click(function(){
+	var img_num = $(this).next().text();
+	$('#sandbox_box').css("background-image","url(img/fondos/"+ img_num +".jpg)");
+	$(".background_bigbox").fadeOut("fast");
+});
+
+$(".memes_bigbox .memebox").click(function(){
+	var img_num = $(this).children("img").next().text();
+		
+	$("div").removeClass("new_meme");
+		
+	$("#sandbox_box").append('<div class="minibox new_meme" style="z-index:1"><div class="form meme"><img src="img/memes/meme' + img_num + '.png" /><img src="img/memes/meme'+ img_num +'_flip.png" style="display:none;" /></div></div>');
+	
+	var da_height = 125*$(".new_meme img").css("height").replace('px', '')/$(".new_meme img").css("width").replace('px', '');
+	
+	$('.new_meme').css({"width":"125px","height":da_height});
+	$('.new_meme img').css({"width":"100%","height":"100%"});
+	$(".memes_bigbox").fadeOut("fast");
+	$(".minibox" ).draggable({ containment: "#sandbox_box", scroll: false });
+	$(".minibox").resizable({containment: "#sandbox_box"});
+	$('.minibox').mousedown(function(){$('.minibox').removeClass('selected');$(this).addClass('selected');});
+	$('.meme').mousedown(function(){$('#flipImg').show()});
+	$('.minibox').click(function(){
+		if(!$(this).children().hasClass('meme'))
+		{$('#flipImg').hide()}
+		});
+	
+});
+	// Flip Meme
+	
+	$('#flipImg').click(function(){
+		$(".selected .meme img").toggle();
+	});
+
+	
+
+// Eliminar -------------------------------------------------------------------------------------
 $('#erase_element').click(function(){$('.selected').remove();});
 
-// Funcion de Añadir Texto	
+// Funcion de Añadir Texto	--------------------------------------------------------------------
+
+	// Clear Text
+	$('#texto_input').click(function(){
+		$(this).val('');
+	})
+
 $('#addtext').click(function(){
 	$('#sandbox_box').append( "<div class='minibox scale' style='z-index:1;'><p class='texto'>" + $('#texto_input').val() + "</p></div>" );
-	$('.minibox').click(function(){$('.minibox').removeClass('selected');$(this).addClass('selected');});
+	$('.minibox').mousedown(function(){$('.minibox').removeClass('selected');$(this).addClass('selected');});
+	$('.meme').mousedown(function(){$('#flipImg').show()});
+	$('.minibox').click(function(){
+		if(!$(this).children().hasClass('meme'))
+		{$('#flipImg').hide()}
+		});	
+	
 	
 	//Editar Texto
 	$('#editar_texto').click(function(){
@@ -88,14 +156,14 @@ $('#addtext').click(function(){
 	$(".minibox").resizable({containment: "#sandbox_box"});
 });
 
-//Color Picker
+//Color Picker ----------------------------------------------------------------------
 $('#colourpicker').colourPicker({
  	ico:    'img/color_picker.png', 
     title:    false
 });
 
 
-// Rotate slider
+// Rotate slider --------------------------------------------------------------------
 $( "#slider" ).slider({
   range: "max",
   min: 0,
@@ -109,7 +177,11 @@ $( "#slider" ).slider({
   }
 });
 
-// Funcion para agregar imagenes al Meme
+// Funcion para agregar imagenes al Meme ---------------------------------------------
+$('#subir_IMG').click(function(){
+	$('.uploadimage input[type=file]').click();	
+});
+
 $('.uploadimage input[type=file]').on('change', function() {
   var id_input = $(this).attr("id");
   ajaxFileUpload(id_input);
@@ -161,7 +233,7 @@ function ajaxFileUpload(id_input)
 			  }
 			}
 
-			$("#sandbox_box").append("<div class='minibox new_img' style='width:"+ancho+"px;height:"+alto+"px; z-index:1'><div class='form'><img src='uploads/" + archivo + "'></div></div></div>");
+			$("#sandbox_box").append("<div class='minibox new_img' style='width:"+ancho+"px;height:"+alto+"px; z-index:1'><div class='form'><img src='uploads/"+ archivo +"'></div></div>");
 
 			var sgte_id = parseInt( $("#"+id_input).attr("rel") ) + 1;
 			$("#upload"+$("#"+id_input).attr("rel")).remove();
@@ -191,7 +263,12 @@ function ajaxFileUpload(id_input)
 
 			
 			$('.new_img img').css({"width":"100%","height":"100%"});
-			$('.form').click(function(){$('.form').removeClass('rotate');$('.minibox').removeClass('selected');$(this).addClass('rotate');$(this).parent('.minibox').addClass('selected');});
+			$('.form').mousedown(function(){$('.form').removeClass('rotate');$('.minibox').removeClass('selected');$(this).addClass('rotate');$(this).parent('.minibox').addClass('selected');});
+			$('.meme').mousedown(function(){$('#flipImg').show()});
+			$('.minibox').click(function(){
+				if(!$(this).children().hasClass('meme'))
+				{$('#flipImg').hide()}
+				});			
 			$(".minibox").draggable({ containment: "#sandbox_box", scroll: false });
 			$(".minibox").resizable({containment: "#sandbox_box"});
 		  }
