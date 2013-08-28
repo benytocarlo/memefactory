@@ -1,5 +1,6 @@
 // Img editor by CHACKNORRIS
 
+
 // Z-Position -------------------------------------------------------------------------------
 $(function (){
   $("#arriba").click(function(){  
@@ -78,6 +79,7 @@ $(".memes_bigbox .memebox").click(function(){
 	$(".memes_bigbox").fadeOut("fast");
 	$(".minibox" ).draggable({ containment: "#sandbox_box", scroll: false });
 	$(".minibox").resizable({containment: "#sandbox_box"});
+	$('.form').mousedown(function(){$('.form').removeClass('rotate');$('.minibox').removeClass('selected');$(this).addClass('rotate');$(this).parent('.minibox').addClass('selected');});
 	$('.minibox').mousedown(function(){$('.minibox').removeClass('selected');$(this).addClass('selected');});
 	$('.meme').mousedown(function(){$('#flipImg').show()});
 	$('.minibox').click(function(){
