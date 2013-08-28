@@ -51,6 +51,7 @@ $(".personajes_meme").click(function(){
 	$(".background_bigbox").fadeOut("fast");
 	$(".memes_bigbox").fadeToggle("fast");
 	$(".minibox").click(function(){
+		
 		$('.memes_bigbox').fadeOut();$('.background_bigbox').fadeOut();
 	});
 });
@@ -79,13 +80,28 @@ $(".memes_bigbox .memebox").click(function(){
 	$(".memes_bigbox").fadeOut("fast");
 	$(".minibox" ).draggable({ containment: "#sandbox_box", scroll: false });
 	$(".minibox").resizable({containment: "#sandbox_box"});
-	$('.form').mousedown(function(){$('.form').removeClass('rotate');$('.minibox').removeClass('selected');$(this).addClass('rotate');$(this).parent('.minibox').addClass('selected');});
-	$('.minibox').mousedown(function(){$('.minibox').removeClass('selected');$(this).addClass('selected');});
+	$('.form').mousedown(function(){
+			$('.form').removeClass('rotate');
+			$('.minibox').removeClass('selected');
+			$(this).addClass('rotate');
+			$(this).parent('.minibox').addClass('selected');
+			console.log("click form");
+			if ($(this).hasClass("meme")) hideToolText(); else showToolText();
+	});
+	$('.minibox').mousedown(function(){
+		$('.minibox').removeClass('selected');
+		$(this).addClass('selected'); 
+		console.log("click minibox");
+		if(!$(this).children().hasClass('meme')) showToolText();
+		
+	});
 	$('.meme').mousedown(function(){$('#flipImg').show()});
+	
 	$('.minibox').click(function(){
 		if(!$(this).children().hasClass('meme'))
 		{$('#flipImg').hide()}
-		});
+		console.log("click minibox");
+	});
 	
 });
 	// Flip Meme
@@ -107,6 +123,7 @@ $('#erase_element').click(function(){$('.selected').remove();});
 	})
 
 $('#addtext').click(function(){
+	if ( $('#texto_input').val() == "") return false;
 	$('#sandbox_box').append( "<div class='minibox scale' style='z-index:1;'><p class='texto'>" + $('#texto_input').val() + "</p></div>" );
 	$('.minibox').mousedown(function(){$('.minibox').removeClass('selected');$(this).addClass('selected');});
 	$('.meme').mousedown(function(){$('#flipImg').show()});
@@ -196,6 +213,12 @@ $( "#slider" ).slider({
 	$(".rotate").rotate({animateTo:mov})		
   }
 });
+
+
+
+
+
+
 
 // Funcion para agregar imagenes al Meme ---------------------------------------------
 $('#subir_IMG').click(function(){
@@ -301,6 +324,31 @@ function ajaxFileUpload(id_input)
 	}
   )
 
+
+
   return false;
 
+
 }
+
+
+
+function hideToolText(){
+	var obj = $("#editar_texto");
+	obj.hide();	
+}
+function showToolText(){
+	var obj = $("#editar_texto");
+	obj.show();	
+}
+
+/* FUNCION EDITAR TEXTO */
+
+$(document).ready(function(){
+ $("body").on("click", ".texto",function(){
+	 	console.log("text");
+		showToolText();
+ })
+
+	
+})
