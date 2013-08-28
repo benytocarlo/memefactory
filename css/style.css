@@ -55,7 +55,8 @@ p { margin:0px; width:auto;}
 .minibox .form img { width:auto; height:auto;}
 .edit_block { background-color:transparent; border:none; width:99%; height:99%;}
 .texto { padding:2px; float:left; width:auto;}
-.selected {border:2px dotted red !important; margin:0px !important}
+.minibox:hover {border:2px dotted red !important; margin:0px !important}
+/* .selected {border:2px dotted red !important; margin:0px !important}*/
 .noborders { border:none !important;}
 
 #editor_toolbox {height:38px;overflow:hidden;background-color:#c1c1c1;}
