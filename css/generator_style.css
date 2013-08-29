@@ -13,6 +13,7 @@ textarea { resize:none}
 .minibox .form img { width:auto; height:auto;}
 .edit_block { background-color:transparent; border:none; width:99%; height:99%;}
 .texto { padding:2px; float:left; width:auto;}
+#background_paper {position:absolute; top:0px; left:0px; width:560px; height:389px; z-index:0;}
 /*.minibox:hover {border:2px dotted red !important; margin:0px !important}*/
 /**/
 .noborders { border:none !important;}
