@@ -29,11 +29,14 @@ $('#print_html').click(function(){
 	};
 	var ajaxurl = "consultas_sql.php";
 	$.post(ajaxurl, data, function(id_insert) {
-      var ajaxurl = "http://ws-wanted.herokuapp.com/memefactory/idmeme/"+id_insert+".json";
-	  $.get(ajaxurl, function(rsp) {
-	  	alert(rsp);
-	    //location.href = "screenshot2.php?id_insert="+id_insert;
-	  });
+		$.ajax({
+		    url:"proxy.php?id_insert="+id_insert,
+		    type:'GET',
+		    dataType:"json",
+		    success:function(rsp){
+		    	alert(rsp.respuesta);
+		    }
+		});
 	});
   }else{alert("vacio");}
   //$("#form").submit();
