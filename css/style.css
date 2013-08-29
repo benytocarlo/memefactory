@@ -47,7 +47,7 @@ p { margin:0px; width:auto;}
 
 #editor_toolbox button {}
 
-#editor_toolbox .main_toolbox {}
+#editor_toolbox .main_toolbox { display:none;}
 #editor_toolbox .main_toolbox .title { font-family:'Komikax'; float:left; margin-left:10px; margin-top:3px;}
 #editor_toolbox .main_toolbox button { float:left; background-image:url(../img/sprite_app.png); font-size:11px;}
 #editor_toolbox .main_toolbox button#flipImg { text-indent:-99999px; background-position:5px 2px; background-repeat:no-repeat; width: 25px;height: 24px;margin-top: 6px;margin-left: 7px; }

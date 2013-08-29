@@ -131,3 +131,7 @@
 [26-Aug-2013 21:52:52 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/appdigit/public_html/test_jquery/edit_image/screenshot2.php on line 83
 [26-Aug-2013 21:52:52 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/appdigit/public_html/test_jquery/edit_image/screenshot2.php on line 83
 [27-Aug-2013 17:08:04 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/appdigit/public_html/test_jquery/edit_image/screenshot2.php on line 83
+[29-Aug-2013 14:49:32 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/appdigit/public_html/test_jquery/edit_image/screenshot2.php on line 19
+[29-Aug-2013 14:51:53 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/appdigit/public_html/test_jquery/edit_image/screenshot2.php on line 19
+[29-Aug-2013 15:08:30 UTC] PHP Warning:  mysql_fetch_array() expects parameter 1 to be resource, boolean given in /home/appdigit/public_html/test_jquery/edit_image/screenshot2.php on line 19
+[29-Aug-2013 17:06:55 UTC] PHP Fatal error:  Allowed memory size of 33554432 bytes exhausted (tried to allocate 19624320 bytes) in /home/appdigit/public_html/test_jquery/edit_image/simpleimage.php on line 40

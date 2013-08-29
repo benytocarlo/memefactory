@@ -6,11 +6,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Editor de Imagenes</title>
-<link href="css/fonts.css" rel="stylesheet" type="text/css" media="all" />
-<link href="css/generator_style.css" rel="stylesheet" type="text/css" media="all" />
-
+<link href="http://appdigital.cl/test_jquery/edit_image/css/fonts.css" rel="stylesheet" type="text/css" media="all" />
+<link href="http://appdigital.cl/test_jquery/edit_image/css/generator_style.css" rel="stylesheet" type="text/css" media="all" />
 </head>
-
 <body>
     <div>
         <div id="sandbox_box">

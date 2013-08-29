@@ -19,8 +19,8 @@ $(function (){
   });
 });
 
-// Funcion Publicar
-$('.publicar-a').click(function(){
+// Funcion PRINT
+$('#print_html').click(function(){
   var html = $("#sandbox_box").html();
   if (html != "") {
 	$("#html_shoot").val(html);
@@ -28,62 +28,14 @@ $('.publicar-a').click(function(){
 	 img_div: $("#html_shoot").val()
 	};
 	var ajaxurl = "consultas_sql.php";
-	$.post(ajaxurl, data, function(id_insert) {
-		$.ajax({
-		    url:"proxy.php?id_insert="+id_insert,
-		    type:'GET',
-		    dataType:"json",
-		    success:function(rsp){
-		    	alert(rsp.respuesta);
-		    }
-		});
+	$.post(ajaxurl, data, function(e) {
+	  var id_insert=e;
+	  location.href = "screenshot2.php?id_insert="+id_insert;
 	});
   }else{alert("vacio");}
   //$("#form").submit();
 });
 
-// Boton Restaurar
-$('.restaurar-a').click(function(){
-  $("#sandbox_box").html("");
-});
-
-// Boton Guardar
-$('.guardar-a').click(function(){
-    var html = $("#sandbox_box").html();
-    if (html != "") {
-  	$("#html_shoot").val(html);
-  	var data = {
-  	 img_div: $("#html_shoot").val()
-  	};
-  	var ajaxurl = "consultas_sql.php";
-  	$.post(ajaxurl, data, function(id_insert) {
-  		$.ajax({
-  		    url:"proxy.php?id_insert="+id_insert,
-  		    type:'GET',
-  		    dataType:"json",
-  		    success:function(rsp){
-				var url = 'download.php?url=http://miapp.cl/heroku/memefactory/'+id_insert+'_image.jpg';
-				window.open(url, '_blank');
-  		    }
-  		});
-  	});
-    }else{alert("vacio");}
-    //$("#form").submit();
-});
-
-/* Boton Compartir esta aplicación */
-$('.compartir').click(function(e) {
-	e.preventDefault();
-	var imagen = "http://www.unicayya.com/images/75x75.jpg";
-	mensaje = "Crea también tus memes únicos, gana Guranamonedas y participa en la subaste que Guaraná tiene para ti!";
-	window.open('http://www.facebook.com/sharer.php?u=http://unicayya.com/', 'facebook-share-dialog', 'width=626,height=436');
-})
-
-/* Boton Conoce los términos y condiciones */
-$('.terms').click(function(e) {
-	e.preventDefault();
-	$("#tyc").show();
-})
 
 // List of Fondos y Memes ---------------------------------------------------------------------
 
@@ -102,6 +54,7 @@ $(".personajes_meme").click(function(){
 		
 		$('.memes_bigbox').fadeOut();$('.background_bigbox').fadeOut();
 	});
+	
 });
 
 $("button.cerrar").click(function(){
@@ -110,7 +63,7 @@ $("button.cerrar").click(function(){
 
 $(".background_bigbox img").click(function(){
 	var img_num = $(this).next().text();
-	$('#sandbox_box').css("background-image","url(img/fondos/"+ img_num +".jpg)");
+	$('#background_paper').css("background-image","url(img/fondos/"+ img_num +".jpg)");
 	$(".background_bigbox").fadeOut("fast");
 });
 
@@ -134,12 +87,15 @@ $(".memes_bigbox .memebox").click(function(){
 			$(this).addClass('rotate');
 			$(this).parent('.minibox').addClass('selected');
 			console.log("click form");
-			if ($(this).hasClass("meme")) hideToolText(); else showToolText();
+			//if ($(this).hasClass("meme")) hideToolText(); else showToolText();
+			//showEditorToolBox();
 	});
 	$('.minibox').mousedown(function(){
 		$('.minibox').removeClass('selected');
 		$(this).addClass('selected'); 
-		console.log("click minibox");
+		console.log("click minibox " + $(".rotate").getRotateAngle());
+		$( "#slider" ).slider( "value", $(".rotate").getRotateAngle());
+		
 		if(!$(this).children().hasClass('meme')) showToolText();
 		
 	});
@@ -150,6 +106,11 @@ $(".memes_bigbox .memebox").click(function(){
 		{$('#flipImg').hide()}
 		console.log("click minibox");
 	});
+	
+	showEditorToolBox();
+	$('#flipImg').show();
+	$(".slider_box").show();
+	hideToolText();
 	
 });
 	// Flip Meme
@@ -173,14 +134,16 @@ $('#erase_element').click(function(){$('.selected').remove();});
 $('#addtext').click(function(){
 	if ( $('#texto_input').val() == "") return false;
 	$('#sandbox_box').append( "<div class='minibox scale' style='z-index:1;'><p class='texto'>" + $('#texto_input').val() + "</p></div>" );
-	$("#texto_input").val('');
 	$('.minibox').mousedown(function(){$('.minibox').removeClass('selected');$(this).addClass('selected');});
 	$('.meme').mousedown(function(){$('#flipImg').show()});
 	$('.minibox').click(function(){
-		if(!$(this).children().hasClass('meme'))
-		{$('#flipImg').hide()}
-		});	
-	
+		if(!$(this).children().hasClass('meme')){
+			$('#flipImg').hide();
+		}
+	});	
+	$('#flipImg').hide()
+	showEditorToolBox();  
+	showToolText();
 	
 	//Editar Texto
 	$('#editar_texto').click(function(){
@@ -197,10 +160,12 @@ $('#addtext').click(function(){
 				$('.selected').append("<textarea class='edit_block' >"+ text_edit +"</textarea>");
 				$('.main_toolbox').hide();
 				$('.text_toolbox').show();
+				$(".slider_box").hide();
 				$('.selected').children('.edit_block').css("font-family", elFamily)
 				$('.selected').children('.edit_block').css("font-size", elSize)
 				$('.selected').children('.edit_block').css("color", elColor)
 				$('.selected').children('.edit_block').css("color", elZindex)
+				$('.edit_block').focus();
 				$("#tipos").change(function() {
 					//alert($(this).val());
 					$('.selected').children('.edit_block').css("font-family", $(this).val());
@@ -250,7 +215,7 @@ $('#colourpicker').colourPicker({
 
 
 // Rotate slider --------------------------------------------------------------------
-$( "#slider" ).slider({
+/*$( "#slider" ).slider({
   range: "max",
   min: 0,
   max: 360,
@@ -261,9 +226,20 @@ $( "#slider" ).slider({
 	$( "#amount" ).val( ui.value );
 	$(".rotate").rotate({animateTo:mov})		
   }
+});*/
+
+$( "#slider" ).slider({
+  range: "max",
+  min: 0,
+  max: 360,
+  value: 0 ,
+  slide: function( event, ui ) {
+	 var mov = ui.value; 
+	  
+	$( "#amount" ).val( ui.value );
+	$(".rotate").rotate({animateTo:mov})		
+  }
 });
-
-
 
 
 
@@ -358,11 +334,19 @@ function ajaxFileUpload(id_input)
 			$('.form').mousedown(function(){$('.form').removeClass('rotate');$('.minibox').removeClass('selected');$(this).addClass('rotate');$(this).parent('.minibox').addClass('selected');});
 			$('.meme').mousedown(function(){$('#flipImg').show()});
 			$('.minibox').click(function(){
-				if(!$(this).children().hasClass('meme'))
-				{$('#flipImg').hide()}
-				});			
+				/*if(!$(this).children().hasClass('meme')){
+					console.log("minibox 3");
+					$('#flipImg').hide();
+					hideToolText(); 
+					showEditorToolBox();
+				}*/
+					
+			});			
 			$(".minibox").draggable({ containment: "#sandbox_box", scroll: false });
 			$(".minibox").resizable({containment: "#sandbox_box"});
+			
+			showEditorToolBox();
+			
 		  }
 		}
 	  },
@@ -389,15 +373,58 @@ function hideToolText(){
 function showToolText(){
 	var obj = $("#editar_texto");
 	obj.show();	
+	$(".slider_box").hide();
 }
+
+
+function showEditorToolBox(){
+	$(".main_toolbox").show();	
+}
+
+function hideEditorToolBox(){
+	$(".main_toolbox").hide();	
+}
+
+function hideEditText(){
+			
+}
+
 
 /* FUNCION EDITAR TEXTO */
 
 $(document).ready(function(){
- $("body").on("click", ".texto",function(){
-	 	console.log("text");
-		showToolText();
- })
+ $("body").on("mousedown", ".minibox",function(){
+	 	if ( $(this).children().hasClass('texto') ) { 
+			showEditorToolBox();  
+			showToolText(); 
+		}else{
+			if($(this).children().hasClass('meme')){
+				hideEditText();
+				$('#cerrar_texto').click();
+				$("#flipImg").show();
+				$(".slider_box").show();
+//				$(".text_toolbox").hide();
+				hideToolText();
+			}else{
+				hideEditText();
+				$(".slider_box").show();
+				$(".text_toolbox").hide();
+				hideToolText();
+				showEditorToolBox(); 
+			}
+		}
+ });
 
+ $(".main_toolbox .title").click(function(){
+	$("#editor_toolbox").hide();	
+ })	
+
+$("#background_paper").click(function(){
+	$(".background_bigbox").fadeOut("fast");
+	$(".memes_bigbox").fadeOut("fast");
+	
+})
+
+//	
 	
 })
