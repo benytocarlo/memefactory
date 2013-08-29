@@ -120,7 +120,7 @@ $(".background_bigbox img").click(function(){
 
 $(".memes_bigbox .memebox").click(function(){
 	var img_num = $(this).children("img").next().text();
-	
+		
 	$("div").removeClass("new_meme");
 		
 	$("#sandbox_box").append('<div class="minibox new_meme" style="z-index:1"><div class="form meme"><img src="img/memes/meme' + img_num + '.png" /><img src="img/memes/meme'+ img_num +'_flip.png" style="display:none;" /></div></div>');
@@ -137,14 +137,12 @@ $(".memes_bigbox .memebox").click(function(){
 			$('.minibox').removeClass('selected');
 			$(this).addClass('rotate');
 			$(this).parent('.minibox').addClass('selected');
-			console.log("click form");
-			//if ($(this).hasClass("meme")) hideToolText(); else showToolText();
-			//showEditorToolBox();
+			
 	});
 	$('.minibox').mousedown(function(){
 		$('.minibox').removeClass('selected');
 		$(this).addClass('selected'); 
-		console.log("click minibox " + $(".rotate").getRotateAngle());
+		
 		$( "#slider" ).slider( "value", $(".rotate").getRotateAngle());
 		
 		if(!$(this).children().hasClass('meme')) showToolText();
@@ -152,16 +150,12 @@ $(".memes_bigbox .memebox").click(function(){
 	});
 	$('.meme').mousedown(function(){$('#flipImg').show()});
 	
-	$('.minibox').click(function(){
-		if(!$(this).children().hasClass('meme'))
-		{$('#flipImg').hide()}
-		console.log("click minibox");
-	});
-	
 	showEditorToolBox();
 	$('#flipImg').show();
 	$(".slider_box").show();
+	$(".text_toolbox").hide();	
 	hideToolText();
+	
 	
 });
 	// Flip Meme
@@ -184,24 +178,24 @@ $('#erase_element').click(function(){$('.selected').remove();});
 
 $('#addtext').click(function(){
 	if ( $('#texto_input').val() == "") return false;
+	$('#sandbox_box').append( "<div class='minibox scale' style='z-index:1;'><p class='texto'>" + $('#texto_input').val() + "</p></div>" );
 	$('.minibox').mousedown(function(){$('.minibox').removeClass('selected');$(this).addClass('selected');});
 	$('.meme').mousedown(function(){$('#flipImg').show()});
-	$('.minibox').click(function(){
-		if(!$(this).children().hasClass('meme')){
-			$('#flipImg').hide();
-		}
-	});	
-	$('#sandbox_box').append( "<div class='minibox scale' style='z-index:1;'><p class='texto'>" + $('#texto_input').val() + "</p></div>" );
+	
 	$('#flipImg').hide()
-	$("#texto_input").val("");
 	$("#sandbox_box").addClass("has_element");
 	showEditorToolBox();  
 	showToolText();
 	
+	
+	
+	
 	//Editar Texto
 	$('#editar_texto').click(function(){
 			var text_edit = $('.selected').children('.texto').text();
-
+			
+			currentObject = $('.selected');
+			
 			if ( $(".texto").parent().hasClass("selected") )
 			  {
 				var elColor = $('.selected').children('.texto').css("color");
@@ -253,6 +247,7 @@ $('#addtext').click(function(){
 				$('#tipo_size option:eq(0)').prop('selected', true);
 				$('.text_toolbox').hide();
 			  }
+			  currentObject = false;
 	});
 	
 	
@@ -268,18 +263,6 @@ $('#colourpicker').colourPicker({
 
 
 // Rotate slider --------------------------------------------------------------------
-/*$( "#slider" ).slider({
-  range: "max",
-  min: 0,
-  max: 360,
-  value: 0,
-  slide: function( event, ui ) {
-	 var mov = ui.value; 
-	  
-	$( "#amount" ).val( ui.value );
-	$(".rotate").rotate({animateTo:mov})		
-  }
-});*/
 
 $( "#slider" ).slider({
   range: "max",
@@ -372,7 +355,7 @@ function ajaxFileUpload(id_input)
 			$("#"+id_superior).hide();
 			var sgt_id = $("#"+id_superior).attr("rel");
 			if (sgt_id < 4){
-			  sgt_id= parseInt(sgt_id)+1;
+			  sgt_id= parseInt(sgt_id)+1;	
 			  $("#upload_"+sgt_id).fadeIn();
 			}*/
 			// Tamaño Default de la imagen
@@ -386,18 +369,11 @@ function ajaxFileUpload(id_input)
 			$('.new_img img').css({"width":"100%","height":"100%"});
 			$('.form').mousedown(function(){$('.form').removeClass('rotate');$('.minibox').removeClass('selected');$(this).addClass('rotate');$(this).parent('.minibox').addClass('selected');});
 			$('.meme').mousedown(function(){$('#flipImg').show()});
-			$('.minibox').click(function(){
-				/*if(!$(this).children().hasClass('meme')){
-					console.log("minibox 3");
-					$('#flipImg').hide();
-					hideToolText(); 
-					showEditorToolBox();
-				}*/
-					
-			});			
+			
+				
 			$(".minibox").draggable({ containment: "#sandbox_box", scroll: false });
 			$(".minibox").resizable({containment: "#sandbox_box"});
-			
+			$('#flipImg').hide();
 			showEditorToolBox();
 			
 		  }
@@ -439,7 +415,31 @@ function hideEditorToolBox(){
 }
 
 function hideEditText(){
-			
+	if (!currentObject) return false;
+	if (currentObject.hasClass("selected")) return false;
+	
+	var edit_block  = currentObject.children('.edit_block').val();
+	var font_family = currentObject.children('.edit_block').css("font-family");
+	var font_size   = currentObject.children('.edit_block').css("font-size");
+	var font_color  = currentObject.children('.edit_block').css("color");
+	var font_zindex = currentObject.children('.edit_block').css("z-index");
+	
+	
+	currentObject.children('.edit_block').remove();
+	currentObject.html("<p class='texto'>" + edit_block + "</p>");
+	currentObject.children('.texto').css("font-family", font_family);
+	currentObject.children('.texto').css("font-size", font_size);
+	currentObject.children('.texto').css("color", font_color);
+	currentObject.children('.texto').css("z-index", font_zindex);
+	$('.main_toolbox').show();
+	$('#tipos option:eq(0)').prop('selected', true);
+	$('#tipo_size option:eq(0)').prop('selected', true);
+	$('.text_toolbox').hide();
+	
+	$(".minibox" ).draggable({ containment: "#sandbox_box", scroll: false });
+	$(".minibox").resizable({containment: "#sandbox_box"});
+	currentObject = false;
+				
 }
 
 
@@ -447,30 +447,36 @@ function hideEditText(){
 
 $(document).ready(function(){
  $("body").on("mousedown", ".minibox",function(){
-	 	if ( $(this).children().hasClass('texto') ) { 
-			showEditorToolBox();  
-			showToolText(); 
-		}else{
-			if($(this).children().hasClass('meme')){
-				hideEditText();
-				$('#cerrar_texto').click();
-				$("#flipImg").show();
-				$(".slider_box").show();
-//				$(".text_toolbox").hide();
-				hideToolText();
+	 	if (!$(this).children().hasClass('edit_block')) {
+			if ( $(this).children().hasClass('texto') ) { // TEXTO
+				showEditorToolBox();  
+				showToolText(); 
 			}else{
-				hideEditText();
-				$(".slider_box").show();
-				$(".text_toolbox").hide();
-				hideToolText();
-				showEditorToolBox(); 
+				if($(this).children().hasClass('meme')){ // IMAGEN MEME
+					hideEditText();
+					$('#cerrar_texto').click();
+					$("#flipImg").show();
+					$(".slider_box").show();
+					hideToolText();
+					
+				}else{ // IMAGEN NO MEME
+					hideEditText();
+					$(".slider_box").show();
+					$(".text_toolbox").hide();
+					$('#flipImg').hide();
+					hideToolText();
+					showEditorToolBox(); 
+				}
 			}
-		}
+			} // end if
  });
-
- $(".main_toolbox .title").click(function(){
-	$("#editor_toolbox").hide();	
- })	
+ /* DETENGO EL ENTER EN EL TEXTAREA */
+$("body").on("keypress", ".edit_block",function(e){
+	var code = (e.keyCode ? e.keyCode : e.which);
+    if(code == 13) {
+	   return false;
+	}
+}) 
 
 $("#background_paper").click(function(){
 	$(".background_bigbox").fadeOut("fast");
