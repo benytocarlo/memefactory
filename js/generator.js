@@ -28,9 +28,12 @@ $('#print_html').click(function(){
 	 img_div: $("#html_shoot").val()
 	};
 	var ajaxurl = "consultas_sql.php";
-	$.post(ajaxurl, data, function(e) {
-	  var id_insert=e;
-	  location.href = "screenshot2.php?id_insert="+id_insert;
+	$.post(ajaxurl, data, function(id_insert) {
+      var ajaxurl = "http://ws-wanted.herokuapp.com/memefactory/idmeme/"+id_insert+".json";
+	  $.get(ajaxurl, function(rsp) {
+	  	alert(rsp);
+	    //location.href = "screenshot2.php?id_insert="+id_insert;
+	  });
 	});
   }else{alert("vacio");}
   //$("#form").submit();
