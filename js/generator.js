@@ -22,7 +22,7 @@ $(function (){
 // Funcion Publicar
 $('.publicar-a').click(function(){
   var html = $("#sandbox_box").html();
-  if (html != "") {
+  if ( $('#sandbox_box').hasClass("has_element")) {
 	$("#html_shoot").val(html);
 	var data = {
 	 img_div: $("#html_shoot").val()
@@ -44,13 +44,14 @@ $('.publicar-a').click(function(){
 
 // Boton Restaurar
 $('.restaurar-a').click(function(){
-  $("#sandbox_box").html("");
+  $("#sandbox_box").removeClass("has_element");	
+  $("#sandbox_box").html('<div id="background_paper" style="position:absolute; top:0px; left:0px; width:560px; height:389px;"></div>');
 });
 
 // Boton Guardar
 $('.guardar-a').click(function(){
     var html = $("#sandbox_box").html();
-    if (html != "") {
+    if ( $('#sandbox_box').hasClass("has_element")) {
   	$("#html_shoot").val(html);
   	var data = {
   	 img_div: $("#html_shoot").val()
@@ -114,17 +115,18 @@ $(".background_bigbox img").click(function(){
 	var img_num = $(this).next().text();
 	$('#background_paper').css("background-image","url(img/fondos/"+ img_num +".jpg)");
 	$(".background_bigbox").fadeOut("fast");
+	$("#sandbox_box").addClass("has_element");
 });
 
 $(".memes_bigbox .memebox").click(function(){
 	var img_num = $(this).children("img").next().text();
-		
+	
 	$("div").removeClass("new_meme");
 		
 	$("#sandbox_box").append('<div class="minibox new_meme" style="z-index:1"><div class="form meme"><img src="img/memes/meme' + img_num + '.png" /><img src="img/memes/meme'+ img_num +'_flip.png" style="display:none;" /></div></div>');
 	
 	var da_height = 125*$(".new_meme img").css("height").replace('px', '')/$(".new_meme img").css("width").replace('px', '');
-	
+	$("#sandbox_box").addClass("has_element");
 	$('.new_meme').css({"width":"125px","height":da_height});
 	$('.new_meme img').css({"width":"100%","height":"100%"});
 	$(".memes_bigbox").fadeOut("fast");
@@ -182,7 +184,6 @@ $('#erase_element').click(function(){$('.selected').remove();});
 
 $('#addtext').click(function(){
 	if ( $('#texto_input').val() == "") return false;
-	$('#sandbox_box').append( "<div class='minibox scale' style='z-index:1;'><p class='texto'>" + $('#texto_input').val() + "</p></div>" );
 	$('.minibox').mousedown(function(){$('.minibox').removeClass('selected');$(this).addClass('selected');});
 	$('.meme').mousedown(function(){$('#flipImg').show()});
 	$('.minibox').click(function(){
@@ -190,7 +191,10 @@ $('#addtext').click(function(){
 			$('#flipImg').hide();
 		}
 	});	
+	$('#sandbox_box').append( "<div class='minibox scale' style='z-index:1;'><p class='texto'>" + $('#texto_input').val() + "</p></div>" );
 	$('#flipImg').hide()
+	$("#texto_input").val("");
+	$("#sandbox_box").addClass("has_element");
 	showEditorToolBox();  
 	showToolText();
 	
@@ -351,7 +355,7 @@ function ajaxFileUpload(id_input)
 			}
 
 			$("#sandbox_box").append("<div class='minibox new_img' style='width:"+ancho+"px;height:"+alto+"px; z-index:1'><div class='form'><img src='uploads/"+ archivo +"'></div></div>");
-
+			$("#sandbox_box").addClass("has_element");
 			var sgte_id = parseInt( $("#"+id_input).attr("rel") ) + 1;
 			$("#upload"+$("#"+id_input).attr("rel")).remove();
 			$("#upload").append('<input type="file" name="fileToUpload" id="upload'+sgte_id+'" rel="'+sgte_id+'" />');
