@@ -19,8 +19,8 @@ $(function (){
   });
 });
 
-// Funcion PRINT
-$('#print_html').click(function(){
+// Funcion Publicar
+$('.publicar-a').click(function(){
   var html = $("#sandbox_box").html();
   if (html != "") {
 	$("#html_shoot").val(html);
@@ -29,15 +29,55 @@ $('#print_html').click(function(){
 	};
 	var ajaxurl = "consultas_sql.php";
 	$.post(ajaxurl, data, function(id_insert) {
-      var ajaxurl = "http://ws-wanted.herokuapp.com/memefactory/idmeme/"+id_insert+".json";
-	  $.get(ajaxurl, function(rsp) {
-	  	alert(rsp);
-	    //location.href = "screenshot2.php?id_insert="+id_insert;
-	  });
+		$.ajax({
+		    url:"proxy.php?id_insert="+id_insert,
+		    type:'GET',
+		    dataType:"json",
+		    success:function(rsp){
+		    	alert(rsp.respuesta);
+		    }
+		});
 	});
   }else{alert("vacio");}
   //$("#form").submit();
 });
+
+// Boton Restaurar
+$('.restaurar-a').click(function(){
+  $("#sandbox_box").html("");
+});
+
+// Boton Guardar
+$('.guardar-a').click(function(){
+    var html = $("#sandbox_box").html();
+    if (html != "") {
+  	$("#html_shoot").val(html);
+  	var data = {
+  	 img_div: $("#html_shoot").val()
+  	};
+  	var ajaxurl = "consultas_sql.php";
+  	$.post(ajaxurl, data, function(id_insert) {
+  		$.ajax({
+  		    url:"proxy.php?id_insert="+id_insert,
+  		    type:'GET',
+  		    dataType:"json",
+  		    success:function(rsp){
+				var url = 'download.php?url=http://miapp.cl/heroku/memefactory/'+id_insert+'_image.jpg';
+				window.open(url, '_blank');
+  		    }
+  		});
+  	});
+    }else{alert("vacio");}
+    //$("#form").submit();
+});
+
+/* Boton Compartir esta aplicación */
+$(".compartir").click(function(e) {
+	e.preventDefault();
+	var imagen = "http://www.unicayya.com/images/75x75.jpg";
+	mensaje = "Crea también tus memes únicos, gana Guranamonedas y participa en la subaste que Guaraná tiene para ti!";
+	window.open('http://www.facebook.com/sharer.php?u=http://unicayya.com/', 'facebook-share-dialog', 'width=626,height=436');
+})
 
 
 // List of Fondos y Memes ---------------------------------------------------------------------
@@ -128,6 +168,7 @@ $('#erase_element').click(function(){$('.selected').remove();});
 $('#addtext').click(function(){
 	if ( $('#texto_input').val() == "") return false;
 	$('#sandbox_box').append( "<div class='minibox scale' style='z-index:1;'><p class='texto'>" + $('#texto_input').val() + "</p></div>" );
+	$("#texto_input").val('');
 	$('.minibox').mousedown(function(){$('.minibox').removeClass('selected');$(this).addClass('selected');});
 	$('.meme').mousedown(function(){$('#flipImg').show()});
 	$('.minibox').click(function(){
