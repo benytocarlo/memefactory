@@ -71,6 +71,15 @@ $('.guardar-a').click(function(){
     //$("#form").submit();
 });
 
+/* Boton Compartir esta aplicación */
+$(".compartir").click(function(e) {
+	e.preventDefault();
+	var imagen = "http://www.unicayya.com/images/75x75.jpg";
+	mensaje = "Crea también tus memes únicos, gana Guranamonedas y participa en la subaste que Guaraná tiene para ti!";
+	window.open('http://www.facebook.com/sharer.php?u=http://unicayya.com/', 'facebook-share-dialog', 'width=626,height=436');
+})
+
+
 // List of Fondos y Memes ---------------------------------------------------------------------
 
 $(".fondo_meme").click(function(){
