@@ -38,14 +38,14 @@
         	<div class="main_toolbox">
             	<span class="title">Editor</span>
                 <div class="slider_box">
-                    <span>Rotar Imagen</span>
+                    <span>Rotar</span>
                     <div id="slider"></div>                
                 </div>
                 <button id="flipImg">Flipear imagen</button>
-                <button id="arriba">Arriba</button>
-                <button id="abajo">Abajo</button>
+                <button id="arriba">Traer Frente<span></span></button>
+                <button id="abajo">Llevar Atras<span></span></button>
             	<button id="editar_texto">Editar Texto<span></span></button>
-                <button id="erase_element">Eliminar Objeto<span></span></button>
+                <button id="erase_element">Eliminar<span></span></button>
             </div>
         	<div class="text_toolbox">
 				<span class="title">Editor Texto</span>
@@ -184,7 +184,9 @@
         </div>
         
         <!--Sector del editor de Imagenes-->        
-    	<div id="sandbox_box"></div>
+    	<div id="sandbox_box">
+        	<div id="background_paper" style="position:absolute; top:0px; left:0px; width:560px; height:389px;"></div>
+        </div>
 
     </div>
     
