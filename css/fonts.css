@@ -1,0 +1,56 @@
+@font-face {
+    font-family: 'Chicle';
+    src: url('../fonts/chicle-regular-webfont.eot');
+    src: url('../fonts/chicle-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/chicle-regular-webfont.woff') format('woff'),
+         url('../fonts/chicle-regular-webfont.ttf') format('truetype'),
+         url('../fonts/chicle-regular-webfont.svg#chicleregular') format('svg');
+    font-weight: 400;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'Creepster';
+    src: url('../fonts/Creepster-Regular.eot');
+    src: url('../fonts/Creepster-Regular.eot?#iefix') format('embedded-opentype'),
+         url(http://themes.googleusercontent.com/static/fonts/creepster/v2/un014as1qOcrVg1hrkn_UT8E0i7KZn-EPnyo3HZu7kw.woff) format('woff'),
+         url('../fonts/Creepster-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Ewert';
+    src: url('../fonts/ewert-regular-webfont.eot');
+    src: url('../fonts/ewert-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/ewert-regular-webfont.woff') format('woff'),
+         url('../fonts/ewert-regular-webfont.ttf') format('truetype'),
+         url('../fonts/ewert-regular-webfont.svg#ewertregular') format('svg');
+    font-weight: 400;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'Flavors';
+    src: url('../fonts/flavors-regular-webfont.eot');
+    src: url('../fonts/flavors-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/flavors-regular-webfont.woff') format('woff'),
+         url('../fonts/flavors-regular-webfont.ttf') format('truetype'),
+         url('../fonts/flavors-regular-webfont.svg#flavorsregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'Titan One';
+    src: url('../fonts/titanone-regular-webfont.eot');
+    src: url('../fonts/titanone-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/titanone-regular-webfont.woff') format('woff'),
+         url('../fonts/titanone-regular-webfont.ttf') format('truetype'),
+         url('../fonts/titanone-regular-webfont.svg#titan_oneregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
