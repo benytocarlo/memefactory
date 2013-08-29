@@ -1,5 +1,5 @@
 // Img editor by CHACKNORRIS
-
+var currentObject = false;
 
 // Z-Position -------------------------------------------------------------------------------
 $(function (){
