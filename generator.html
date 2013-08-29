@@ -3,10 +3,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Generador de Memes</title>
-<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
-<link href="css/jpicker.css" rel='stylesheet' type='text/css'/>
+
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
-<link href='http://fonts.googleapis.com/css?family=Chicle|Flavors|Ewert|Creepster|Titan+One' rel='stylesheet' type='text/css'>
+<link href="css/jpicker.css" rel='stylesheet' type='text/css'/>
+<link href="css/fonts.css" rel="stylesheet" type="text/css" media="all" />
+<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+<link href="css/generator_style.css" rel="stylesheet" type="text/css" media="all" />
+
 </head>
 
 <body>
@@ -41,12 +44,12 @@
                 <button id="flipImg">Flipear imagen</button>
                 <button id="arriba">Arriba</button>
                 <button id="abajo">Abajo</button>
-            	<button id="editar_texto">Editar Texto</button>
-                <button id="erase_element">Eliminar</button>
+            	<button id="editar_texto">Editar Texto<span></span></button>
+                <button id="erase_element">Eliminar Objeto<span></span></button>
             </div>
         	<div class="text_toolbox">
 				<span class="title">Editor Texto</span>
-                <label>Tipografia</label>
+                <label>Tipografia:</label>
                 <select id="tipos">
                 	<option value="'Arial'">Arial</option>
                     <option value="'Chicle'">Chicle</option>
@@ -55,7 +58,7 @@
                     <option value="'Creepster'">Creepster</option>
                     <option value="'Titan One'">Titan One</option>
                 </select>   
-                <label>Tamaño</label> 
+                <label>Tamaño:</label> 
                 <select id="tipo_size">
                 	<option value="12">12</option>
                     <option value="14">14</option>
@@ -68,7 +71,7 @@
                     <option value="42">42</option>
                     <option value="72">72</option>                    
                 </select>
-                <label>Color</label>
+                <label>Color:</label>
                 <span id="font-colour-box">
                 <select id="colourpicker" name="colour">
                     <option value="ffffff">#ffffff</option>
@@ -136,7 +139,7 @@
                     <option value="340096">#340096</option>
                 </select>
                 </span> 
-                <button id="cerrar_texto">Cerrar</button>                           
+                <button id="cerrar_texto">Cerrar<span></span></button>                           
             </div>
         </div>
         
@@ -186,14 +189,14 @@
     </div>
     
     <div id="footer_generator">
-    	<a href="#">Conoce los términos y condiciones</a>
+    	<a href="#" class="terms">Conoce los términos y condiciones<span></span></a>
         <div class="acciones">
         	<div class="restaurar-a box">Restaurar</div>
             <div class="guardar-a box">Guardar</div>
             <div class="publicar-a box">Publicar</div>
         </div>
         
-        <div class="compartir">Comparte esta aplicación</div>
+        <div class="compartir"><span></span>Comparte esta aplicación</div>
     </div>
     
 </div>

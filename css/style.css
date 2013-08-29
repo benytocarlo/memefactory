@@ -43,20 +43,6 @@ p { margin:0px; width:auto;}
 #flipImg { display:none;}
 
 #menu_generator .fondo_meme p, #menu_generator .personajes_meme p{ margin:0px; padding:0px; line-height:19px;}
-.uploadimage input { display:none;}
-#subir_IMG {background-color:#ff6600; color:#FFF; font-family:'Komikax'; padding:5px 11px 11px; display:block; margin-right:15px; margin-bottom:6px; cursor:pointer; border:0px; width:164px; margin-top:0px; text-align:left; position:relative;}
-#subir_IMG span { background-image:url(../img/sprite_app.png); background-position:-150px -50px; width:26px; height:23px; position:absolute; right:5px; top:7px;}
-#image_editor {	position:absolute;width:560px;height:427px;top:158px;left:200px;}
-
-#sandbox_box {width:560px; height:389px;background-color:#FFFFFF; overflow: hidden; float:left; clear:left; position:relative}
-
-.minibox {float:left; width:auto; height:auto; padding:4px;padding-bottom:8px;cursor:move; position:absolute !important; top:3px; left:3px; margin:2px; }
-.minibox .form {width:100%; height:100%; }
-.minibox .form img { width:auto; height:auto;}
-.edit_block { background-color:transparent; border:none; width:99%; height:99%;}
-.texto { padding:2px; float:left; width:auto;}
-.selected {border:2px dotted red !important; margin:0px !important}
-.noborders { border:none !important;}
 
 #editor_toolbox {height:38px;overflow:hidden;background-color:#c1c1c1;}
 #editor_toolbox button { background-color:#505050; border:0px; color:#FFF;-webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; cursor:pointer; }
@@ -66,15 +52,44 @@ p { margin:0px; width:auto;}
 #editor_toolbox .main_toolbox {}
 #editor_toolbox .main_toolbox .title { font-family:'Komikax'; float:left; margin-left:10px; margin-top:3px;}
 #editor_toolbox .main_toolbox button { float:left; background-image:url(../img/sprite_app.png)}
-#editor_toolbox .main_toolbox button#flipImg { text-indent:-99999px; background-position:0px 0px; background-repeat:no-repeat; }
-
+#editor_toolbox .main_toolbox button#flipImg { text-indent:-99999px; background-position:5px 2px; background-repeat:no-repeat; width: 25px;height: 24px;margin-top: 6px;margin-left: 7px; }
+#editor_toolbox .main_toolbox button#arriba {text-indent:-99999px; background-position:-93px 7px; background-repeat:no-repeat; width: 22px;height: 24px;margin-top: 6px;margin-left: 7px;}
+#editor_toolbox .main_toolbox button#abajo {text-indent:-99999px; background-position:-43px 7px; background-repeat:no-repeat; width: 22px;height: 24px;margin-top: 6px;margin-left: 1px;}
+#editor_toolbox .main_toolbox button#editar_texto { background-image:none;height: 24px;margin-top: 6px;margin-left: 4px; position:relative; padding-right:23px; margin-right:4px;}
+#editor_toolbox .main_toolbox button#editar_texto span{background-image:url(../img/sprite_app.png); width:15px; height:15px; background-position:-150px 0px; position:absolute; top:4px; right:3px;}
+#editor_toolbox .main_toolbox button#erase_element { background-image:none; height: 24px; margin-top: 6px; position:relative; padding-right:23px; }
+#editor_toolbox .main_toolbox button#erase_element span{background-image:url(../img/sprite_app.png); width:15px; height:15px; background-position:-199px 2px; position:absolute; top:4px; right:3px;}
 
 #editor_toolbox .main_toolbox .slider_box { float:left; width:170px; margin-top:10px; margin-left:7px;}
 #editor_toolbox .main_toolbox .slider_box span{ float:left; width:80px; font-size:12px; margin-right:8px;}
 #editor_toolbox .main_toolbox .ui-slider .ui-slider-handle { width:10px; height:20px;}
 #editor_toolbox .main_toolbox .slider_box #slider{ float:left; width:80px;}
+
 #editor_toolbox .text_toolbox { display:none; background-color:#c1c1c1; position:absolute; width:100%; height:100%;}
+#editor_toolbox .text_toolbox .title{font-family:'Komikax'; float:left; margin-left:10px; margin-top:3px;}
+#editor_toolbox .text_toolbox label{ font-size:11px; float:left; margin-top:10px; margin-left:5px; font-weight:bold;}
+#editor_toolbox .text_toolbox select{ float:left; margin-top:8px; margin-left:4px;}
+
+#font-colour-box { float:left; margin-top:5px;}
+#font-colour-box input{ float: left;border: none;width: 25px;margin-right: 3px;margin-left: 3px;height: 18px;margin-top: 2px;}
+#font-colour-box a { float:left; margin-top:2px;}
+#cerrar_texto {background-image:none; height: 24px; margin-top: 6px; position:relative; padding-right:23px; margin-left:15px; }
+#cerrar_texto span{background-image:url(../img/sprite_app.png); width:15px; height:15px; background-position:-199px 2px; position:absolute; top:4px; right:3px;}
+
+/* Selector */
+
+.selected {border:2px dotted red !important; margin:0px !important}
 
 /* EL FOOTER */
 
-#footer_generator {position:absolute;top:572px;}
+#footer_generator {position: absolute;top: 592px;width: 741px;margin-left: 20px; height:73px;}
+#footer_generator .terms{ width:195px; float:left; background-color:#006699; color:#FFF; text-decoration:none; font-size:11px; padding:9px; -webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px; position:relative}
+#footer_generator .terms span{ background-image:url(../img/sprite_app.png); width:15px; height:17px; background-position:-550px 0px; position:absolute; top:7px; right:8px;}
+#footer_generator .acciones{ width:418px; float:right;}
+#footer_generator .acciones div { float: left;width: 100px;background-color: #0099ff;color: #FFF;font-family: 'Komikax';text-align: center;padding: 9px 15px;margin-left: 9px; cursor:pointer;}
+
+#footer_generator .compartir { position:absolute; right:0px; bottom:0px; background-color:#FFF; color:#006699; font-size:10px; font-weight:bold; -webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px; padding:3px; padding-left:21px; cursor:pointer;}
+#footer_generator .compartir span { background-image:url(../img/sprite_app.png); background-position:0px -50px; width:16px; height:17px; position:absolute; top:0px; left:0px;}
+
+
+

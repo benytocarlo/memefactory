@@ -6,22 +6,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Editor de Imagenes</title>
-<link href="css/style.css" rel='stylesheet' type='text/css'/>
-<link href='http://fonts.googleapis.com/css?family=Chicle|Flavors|Ewert|Creepster|Titan+One' rel='stylesheet' type='text/css'>
-<!-- 
-
-Nombres de Tipografias:
-
-font-family: 'Chicle', cursive;
-font-family: 'Flavors', cursive;
-font-family: 'Ewert', cursive;
-font-family: 'Creepster', cursive;
-font-family: 'Titan One', cursive;
-
--->
-<style>
-#sandbox_box { position:relative; float:left;width:810px; height:600px; top:25%; left:15px; background-color:#CFF; clear:left;}
-</style>
+<link href="css/fonts.css" rel="stylesheet" type="text/css" media="all" />
+<link href="css/generator_style.css" rel="stylesheet" type="text/css" media="all" />
 
 </head>
 
