@@ -19,7 +19,7 @@ $(function (){
   });
 });
 
-// Funcion PRINT
+// Funcion Publicar
 $('.publicar-a').click(function(){
   var html = $("#sandbox_box").html();
   if (html != "") {
@@ -46,6 +46,31 @@ $('.publicar-a').click(function(){
 $('.restaurar-a').click(function(){
   $("#sandbox_box").html("");
 });
+
+// Boton Guardar
+$('.guardar-a').click(function(){
+    var html = $("#sandbox_box").html();
+    if (html != "") {
+  	$("#html_shoot").val(html);
+  	var data = {
+  	 img_div: $("#html_shoot").val()
+  	};
+  	var ajaxurl = "consultas_sql.php";
+  	$.post(ajaxurl, data, function(id_insert) {
+  		$.ajax({
+  		    url:"proxy.php?id_insert="+id_insert,
+  		    type:'GET',
+  		    dataType:"json",
+  		    success:function(rsp){
+				var url = 'download.php?url=http://miapp.cl/heroku/memefactory/'+id_insert+'_image.jpg';
+				window.open(url, '_blank');
+  		    }
+  		});
+  	});
+    }else{alert("vacio");}
+    //$("#form").submit();
+});
+
 // List of Fondos y Memes ---------------------------------------------------------------------
 
 $(".fondo_meme").click(function(){
@@ -134,6 +159,7 @@ $('#erase_element').click(function(){$('.selected').remove();});
 $('#addtext').click(function(){
 	if ( $('#texto_input').val() == "") return false;
 	$('#sandbox_box').append( "<div class='minibox scale' style='z-index:1;'><p class='texto'>" + $('#texto_input').val() + "</p></div>" );
+	$("#texto_input").val('');
 	$('.minibox').mousedown(function(){$('.minibox').removeClass('selected');$(this).addClass('selected');});
 	$('.meme').mousedown(function(){$('#flipImg').show()});
 	$('.minibox').click(function(){
