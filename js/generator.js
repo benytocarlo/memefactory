@@ -20,7 +20,7 @@ $(function (){
 });
 
 // Funcion PRINT
-$('#print_html').click(function(){
+$('.publicar-a').click(function(){
   var html = $("#sandbox_box").html();
   if (html != "") {
 	$("#html_shoot").val(html);
@@ -42,7 +42,10 @@ $('#print_html').click(function(){
   //$("#form").submit();
 });
 
-
+// Boton Restaurar
+$('.restaurar-a').click(function(){
+  $("#sandbox_box").html("");
+});
 // List of Fondos y Memes ---------------------------------------------------------------------
 
 $(".fondo_meme").click(function(){
