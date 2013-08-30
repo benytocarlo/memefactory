@@ -282,10 +282,6 @@ $( "#slider" ).slider({
 
 
 // Funcion para agregar imagenes al Meme ---------------------------------------------
-$('#subir_IMG').click(function(){
-	$('.uploadimage input[type=file]').click();	
-});
-
 $('.uploadimage input[type=file]').on('change', function() {
   var id_input = $(this).attr("id");
   ajaxFileUpload(id_input);

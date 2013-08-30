@@ -1,7 +1,8 @@
 body { font-family:Arial, Helvetica, sans-serif; margin:0px; padding:0px; }
 textarea { resize:none}
 
-.uploadimage input { display:none;}
+.uploadimage input {position: absolute;z-index: 98;text-indent: -99999px;width: 131px;line-height: 45px;padding-left: 32px;padding-bottom: 12px; cursor:pointer;}
+.uploadimage:hover #subir_IMG {background-color: #993300;}
 #subir_IMG {background-color:#ff6600; color:#FFF; font-family:'Komikax'; padding:5px 11px 11px; display:block; margin-right:15px; margin-bottom:6px; cursor:pointer; border:0px; width:164px; margin-top:0px; text-align:left; position:relative;}
 #subir_IMG span { background-image:url(../img/sprite_app.png); background-position:-150px -50px; width:26px; height:23px; position:absolute; right:5px; top:7px;}
 #image_editor {	position:absolute;width:560px;height:427px;top:158px;left:200px;}
